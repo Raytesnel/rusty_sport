@@ -1,36 +1,60 @@
+mod models;
+mod services;
+
 use dioxus::prelude::*;
 
-const FAVICON: Asset = asset!("/assets/favicon.ico");
-const MAIN_CSS: Asset = asset!("/assets/main.css");
-const HEADER_SVG: Asset = asset!("/assets/header.svg");
+use services::exercise_loader::load_exercises;
+
 
 fn main() {
     dioxus::launch(App);
 }
 
-#[component]
+
 fn App() -> Element {
-    rsx! {
-        document::Link { rel: "icon", href: FAVICON }
-        document::Link { rel: "stylesheet", href: MAIN_CSS }
-        Hero {}
 
-    }
-}
+    let exercises = load_exercises()
+        .expect("Could not load exercises");
 
-#[component]
-pub fn Hero() -> Element {
+
     rsx! {
         div {
-            id: "hero",
-            img { src: HEADER_SVG, id: "header" }
-            div { id: "links",
-                a { href: "https://dioxuslabs.com/learn/0.7/", "📚 Learn Dioxus" }
-                a { href: "https://dioxuslabs.com/awesome", "🚀 Awesome Dioxus" }
-                a { href: "https://github.com/dioxus-community/", "📡 Community Libraries" }
-                a { href: "https://github.com/DioxusLabs/sdk", "⚙️ Dioxus Development Kit" }
-                a { href: "https://marketplace.visualstudio.com/items?itemName=DioxusLabs.dioxus", "💫 VSCode Extension" }
-                a { href: "https://discord.gg/XgGxMSkvUM", "👋 Community Discord" }
+            style: "
+                width: 100vw;
+                height: 100vh;
+                background: #111;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                font-family: sans-serif;
+            ",
+
+            h1 {
+                "Interlude"
+            }
+
+            p {
+                "Loaded {exercises.len()} exercises"
+            }
+
+            for exercise in exercises {
+                div {
+                    style: "
+                        margin: 10px;
+                        padding: 10px;
+                        border: 1px solid #444;
+                    ",
+
+                    h2 {
+                        "{exercise.name}"
+                    }
+
+                    p {
+                        "{exercise.value}"
+                    }
+                }
             }
         }
     }

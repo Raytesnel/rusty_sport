@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Wall Slides",
+    "type": "reps",
+    "value": 15,
+    "minimum_seconds": 20,
+    "image": "wall_slide.png",
+    "body_parts": ["shoulders"],
+    "tags": ["mobility"],
+    "difficulty": 1,
+    "load": 1,
+  },
+  {
+    "name": "Plank",
+    "type": "time",
+    "value": 30,
+    "minimum_seconds": 30,
+    "image": "plank.png",
+    "body_parts": ["core"],
+    "tags": ["stability"],
+    "difficulty": 1,
+    "load": 1,
+  },
+]
