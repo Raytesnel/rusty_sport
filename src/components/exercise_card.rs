@@ -3,9 +3,8 @@ use dioxus::prelude::*;
 use crate::models::exercise::Exercise;
 use crate::utils::formatters::pretty_label;
 
-
 #[component]
-pub fn ExerciseCard(exercise: Exercise) -> Element {
+pub fn ExerciseCard(exercise: Exercise, on_done: EventHandler<()>) -> Element {
     let unit = match exercise.exercise_type {
         crate::models::exercise::ExerciseType::Reps => "reps",
         crate::models::exercise::ExerciseType::Time => "seconds",
@@ -39,6 +38,11 @@ pub fn ExerciseCard(exercise: Exercise) -> Element {
                         "{pretty_label(goal)}"
                     }
                 }
+            }
+
+            button {
+                onclick: move |_| on_done.call(()),
+                "DONE"
             }
         }
     }
