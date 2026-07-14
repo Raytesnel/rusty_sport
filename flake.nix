@@ -28,6 +28,7 @@
             webkitgtk_4_1
             openssl
             xdotool
+            nil
           ];
 
           shellHook = ''

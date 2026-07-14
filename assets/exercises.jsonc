@@ -6,7 +6,7 @@
     "minimum_seconds": 20,
     "image": "wall_slide.png",
     "body_parts": ["shoulders"],
-    "tags": ["mobility"],
+    "goals": ["shoulder_health", "desk_recovery", "posture"],
     "difficulty": 1,
     "load": 1,
   },
@@ -17,8 +17,8 @@
     "minimum_seconds": 30,
     "image": "plank.png",
     "body_parts": ["core"],
-    "tags": ["stability"],
     "difficulty": 1,
     "load": 1,
+    "goals": ["strong_core"],
   },
 ]

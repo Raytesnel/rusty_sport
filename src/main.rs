@@ -1,59 +1,41 @@
+mod components;
 mod models;
 mod services;
+mod utils;
 
 use dioxus::prelude::*;
 
+use components::exercise_card::ExerciseCard;
 use services::exercise_loader::load_exercises;
-
 
 fn main() {
     dioxus::launch(App);
 }
 
-
 fn App() -> Element {
-
-    let exercises = load_exercises()
-        .expect("Could not load exercises");
-
+    let exercises = load_exercises().expect("Could not load exercises");
 
     rsx! {
+
         div {
             style: "
-                width: 100vw;
-                height: 100vh;
-                background: #111;
-                color: white;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                font-family: sans-serif;
+                width:100vw;
+                height:100vh;
+                background:#111;
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+                justify-content:center;
             ",
 
             h1 {
                 "Interlude"
             }
 
-            p {
-                "Loaded {exercises.len()} exercises"
-            }
 
             for exercise in exercises {
-                div {
-                    style: "
-                        margin: 10px;
-                        padding: 10px;
-                        border: 1px solid #444;
-                    ",
-
-                    h2 {
-                        "{exercise.name}"
-                    }
-
-                    p {
-                        "{exercise.value}"
-                    }
+                ExerciseCard {
+                    exercise
                 }
             }
         }
