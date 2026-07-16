@@ -4,7 +4,11 @@ use crate::models::exercise::Exercise;
 use crate::utils::formatters::pretty_label;
 
 #[component]
-pub fn ExerciseCard(exercise: Exercise, on_done: EventHandler<()>) -> Element {
+pub fn ExerciseCard(
+    exercise: Exercise,
+    exercise_finished: bool,
+    on_done: EventHandler<()>,
+) -> Element {
     let unit = match exercise.exercise_type {
         crate::models::exercise::ExerciseType::Reps => "reps",
         crate::models::exercise::ExerciseType::Time => "seconds",
@@ -41,8 +45,24 @@ pub fn ExerciseCard(exercise: Exercise, on_done: EventHandler<()>) -> Element {
             }
 
             button {
+                disabled: !exercise_finished,
+
+                style: if exercise_finished {
+                    "
+                    padding:10px 20px;
+                    cursor:pointer;
+                    "
+                } else {
+                    "
+                    padding:10px 20px;
+                    opacity:0.4;
+                    cursor:not-allowed;
+                    "
+                },
+
                 onclick: move |_| on_done.call(()),
-                "DONE"
+
+                "Complete"
             }
         }
     }
